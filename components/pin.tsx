@@ -12,9 +12,8 @@ const pinStyle = {
 
 function Pin({size = 20}) {
   return (
-    <svg height={size} viewBox="0 0 24 24" style={pinStyle}>
-      <path d={ICON} />
-    </svg>
+    <div className="relative rounded-full w-2 h-2 bg-red-500 cursor-pointer">
+    </div>
   );
 }
 

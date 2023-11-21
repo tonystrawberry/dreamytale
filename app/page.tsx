@@ -9,7 +9,7 @@ import Map, {
   ScaleControl,
 } from "react-map-gl";
 import TALES from "./data/tales.json";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback, useRef } from "react";
 import Pin from "@/components/pin";
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,6 +17,52 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export default function Home() {
   const [popupInfo, setPopupInfo] = useState(null);
+  const [story, setStory] = useState(null);
+  const [interacting, setInteracting] = useState(false);
+
+  const mapRef = useRef<MapRef>();
+
+  // Rotate the map continuously
+  function rotateCamera(timestamp) {
+    // Convert rotation to 360 degrees over 30 seconds
+    mapRef.current.rotateTo((timestamp / 1000) % 360, { duration: 0 });
+
+    if (true) {
+      return;
+    }
+
+    // Request the next frame
+    requestAnimationFrame(rotateCamera);
+
+  }
+
+  const onMapLoad = useCallback(() => {
+    mapRef.current.on('move', () => {
+    });
+
+    mapRef.current.on('click', () => {
+      console.log("interacting", interacting)
+      console.log("click");
+      setInteracting(true);
+    });
+
+    mapRef.current.on('')
+
+    rotateCamera(0);
+
+  }, []);
+
+  const onMouseEnter = (tale) => {
+    mapRef.current.flyTo({
+      center: [tale.longitude, tale.latitude],
+      zoom: 4,
+      pitch: 30,
+      duration: 3000,
+      essential: true,
+    });
+
+    setPopupInfo(tale);
+  }
 
   const pins = useMemo(
     () =>
@@ -31,6 +77,13 @@ export default function Home() {
             // with `closeOnClick: true`
             e.originalEvent.stopPropagation();
             setPopupInfo(tale);
+            mapRef.current.flyTo({
+              center: [tale.longitude, tale.latitude],
+              zoom: 4,
+              pitch: 30,
+              duration: 3000,
+              essential: true,
+            });
           }}
         >
           <Pin />
@@ -43,6 +96,8 @@ export default function Home() {
     <main className="h-screen flex">
       <div className="basis-1/2">
         <Map
+          ref={mapRef}
+          onLoad={onMapLoad}
           initialViewState={{
             latitude: 40,
             longitude: -100,
@@ -62,31 +117,44 @@ export default function Home() {
 
           {popupInfo && (
             <Popup
-              anchor="top"
+              anchor="bottom"
+              offset={20}
+              className="cursor-pointer"
               longitude={Number(popupInfo.longitude)}
               latitude={Number(popupInfo.latitude)}
               onClose={() => setPopupInfo(null)}
+
             >
-              <div>
-                {popupInfo.city}, {popupInfo.state} |{" "}
-                <a
-                  target="_new"
-                  href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${popupInfo.city}, ${popupInfo.state}`}
-                >
-                  Wikipedia
-                </a>
+              <div onClick={(e) => { setStory(popupInfo)}}>
+                <div className="absolute top-0 left-0 right-0 bottom-0 w-100 h-100 z-1 bg-gradient-to-b from-transparent to-black opacity-40"></div>
+                <div className="absolute left-4 top-4 text-white text-sm drop-shadow tracking-wide uppercase">
+                  {popupInfo.city}
+                </div>
+                <div className="absolute left-4 bottom-4 text-white text-sm drop-shadow tracking-wide uppercase">
+                  {popupInfo.city}
+                </div>
+
+                <img className="w-100 h-[180px] object-cover" src={popupInfo.image} />
               </div>
-              <img width="100%" src={popupInfo.image} />
             </Popup>
           )}
         </Map>
       </div>
       <div className="basis-1/2 bg-white p-16 overflow-y-scroll">
-        <div className="rounded overflow-hidden">
+        { TALES.map((tale, index) => (
+          <div key={`tale-${index}`} className="mb-8" onMouseEnter={() => { onMouseEnter(tale)}}>
+            <div className="flex items-center">
+              <div className="w-8 h-8 rounded-full bg-gray-300 mr-4"></div>
+              <div className="text-gray-500 text-sm">{tale.city}</div>
+            </div>
+          </div>
+        ))}
+
+        {/* <div className="rounded overflow-hidden">
           <div className="h-32 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
         </div>
         <div className="mt-8">
-          <h1 className="text-4xl font-bold mb-2">The Star Weaver's Gift</h1>
+          <h1 className="text-4xl font-bold mb-2">{story?.city}</h1>
           <p className="text-gray-500">
             In the kingdom of Lumina, nestled amidst rolling hills and enchanted
             forests, there lived a young weaver named Elara. Her nimble fingers
@@ -131,7 +199,7 @@ export default function Home() {
             Elara, the Star Weaver, lived on—a testament to the power of dreams
             woven with threads of hope and love.
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );
