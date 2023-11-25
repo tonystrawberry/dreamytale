@@ -2,7 +2,7 @@ const importAll = (r): Promise<any[]> =>
   Promise.all(
     r.keys().map(async (fileName) => {
       const module = r(fileName);
-      const slug = fileName.substr(2).replace(/\/content\.mdx$/, "");
+      const slug = fileName.substr(2).replace(/\/page\.mdx$/, "");
 
       return {
         slug,
@@ -17,11 +17,11 @@ const importAll = (r): Promise<any[]> =>
 export const getAllStories = async (): Promise<any[]> =>
   importAll(
     //@ts-ignore
-    require.context("../app/stories/", true, /^\.\/[^\/]+\/content\.mdx$/)
+    require.context("../app/stories/", true, /^\.\/[^\/]+\/page\.mdx$/)
   );
 
 export const getStoryBySlug = async (slug: string): Promise<any> => {
-  const module = require(`../app/stories/${slug}/content.mdx`);
+  const module = require(`../app/stories/${slug}/page.mdx`);
 
   return {
     slug,

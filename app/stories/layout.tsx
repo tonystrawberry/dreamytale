@@ -1,6 +1,5 @@
 "use client";
 
-import { Inter } from "next/font/google";
 import Pin from "@/components/pin";
 import Map, {
   FullscreenControl,
@@ -13,8 +12,8 @@ import Map, {
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { MapRef } from "react-map-gl";
 import useAppStore from "@/state/state";
+import styles from "./styles.module.scss";
 
-const inter = Inter({ subsets: ["latin"] });
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useRouter } from "next/navigation";
 
@@ -66,7 +65,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <main className="h-screen flex">
           <div className="basis-1/2">
             <Map
@@ -122,7 +121,7 @@ export default function RootLayout({
               )}
             </Map>
           </div>
-          <div className="basis-1/2 bg-white p-16 overflow-y-scroll">
+          <div className={`basis-1/2 p-14 overflow-y-scroll bg-white`}>
             {children}
           </div>
         </main>
