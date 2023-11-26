@@ -10,10 +10,13 @@ const pinStyle = {
   stroke: 'none'
 };
 
-function Pin({size = 20}) {
+function Pin() {
   return (
-    <div className="relative rounded-full w-2 h-2 bg-red-500 cursor-pointer">
-    </div>
+      <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center cursor-pointer">
+        <div className="w-8 h-8 bg-red-500 rounded-full absolute animate-ping delay-1000"></div>
+        <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+      </div>
+
   );
 }
 

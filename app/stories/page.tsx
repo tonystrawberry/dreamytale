@@ -8,7 +8,6 @@ import Image from "next/image";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
 
-
 export default function Home() {
   const router = useRouter();
   const mapRef = useAppStore((state) => state.mapRef);
@@ -27,21 +26,27 @@ export default function Home() {
     });
 
     setPopupInfo(story);
-  }
+  };
 
   // Get all the stories from the `stories` directory
   useEffect(() => {
     getAllStories().then((stories: any[]) => {
       setStories(stories);
-    }
-  )}, [])
+    });
+  }, []);
 
   return (
-    <div>
+    <>
       <h1 className="text-4xl font-bold mb-8">Stories</h1>
-      <div className="grid grid-cols-4 gap-3">
-        { stories.map((story, index) => (
-          <div key={`story-${index}`} className="mb-8" onMouseEnter={() => { onMouseEnter(story)}}>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {stories.map((story, index) => (
+          <div
+            key={`story-${index}`}
+            className="mb-8"
+            onMouseEnter={() => {
+              onMouseEnter(story);
+            }}
+          >
             <div className="relative overflow-hidden rounded-md cursor-pointer">
               <Image
                 src={story.thumbnailUrl}
@@ -49,7 +54,9 @@ export default function Home() {
                 width={250}
                 height={350}
                 className="object-cover transition-all hover:scale-105 aspect-[3/4] brightness-75 cursor-pointer"
-                onClick={() => { router.push(`/stories/${story.slug}`) }}
+                onClick={() => {
+                  router.push(`/stories/${story.slug}`);
+                }}
               />
 
               <div className="absolute w-100 bottom-2 left-2 right-2 text-white">
@@ -59,7 +66,6 @@ export default function Home() {
           </div>
         ))}
       </div>
-    </div>
-
+    </>
   );
 }

@@ -15,6 +15,7 @@
     "@redux-devtools/extension": "^3.2.6",
     "@types/mdx": "^2.0.10",
     "classnames": "^2.3.2",
+    "framer-motion": "^10.16.5",
     "lucide": "^0.293.0",
     "lucide-react": "^0.293.0",
     "mapbox-gl": "^2.15.0",

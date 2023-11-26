@@ -15,7 +15,8 @@ import useAppStore from "@/state/state";
 import styles from "./styles.module.scss";
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -29,8 +30,9 @@ export default function RootLayout({
   const setMapRef = useAppStore((state) => state.setMapRef);
   const mapRef = useRef<MapRef>();
   const stories = useAppStore((state) => state.stories);
-  const[pins, setPins] = useState<JSX.Element[]>([]);
+  const [pins, setPins] = useState<JSX.Element[]>([]);
   const router = useRouter();
+  const pathname = usePathname();
 
   setMapRef(mapRef);
 
@@ -42,7 +44,7 @@ export default function RootLayout({
         key={`marker-${index}`}
         longitude={story.metadata.longitude}
         latitude={story.metadata.latitude}
-        anchor="bottom"
+        anchor="center"
         onClick={(e) => {
           // If we let the click event propagates to the map, it will immediately close the popup
           // with `closeOnClick: true`
@@ -121,9 +123,34 @@ export default function RootLayout({
               )}
             </Map>
           </div>
-          <div className={`basis-1/2 p-14 overflow-y-scroll bg-white`}>
-            {children}
-          </div>
+          <AnimatePresence mode="wait" >
+            <motion.div
+              className={`basis-1/2 p-14 overflow-y-scroll bg-white`}
+              key={pathname}
+              initial="initialState"
+              animate="animateState"
+              exit="exitState"
+              variants={{
+                initialState: {
+                  opacity: 0,
+                },
+                animateState: {
+                  opacity: 1,
+                  transition: {
+                    duration: 1.5,
+                  },
+                },
+                exitState: {
+                  opacity: 0,
+                  transition: {
+                    duration: 0,
+                  },
+                },
+              }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </main>
       </body>
     </html>
