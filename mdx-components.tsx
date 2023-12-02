@@ -10,7 +10,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ children }) => <h3 className="text-2xl font-bold my-4 tracking-tighter">{children}</h3>,
     em: ({ children }) => <p className="text-xl mb-2">{children}</p>,
     img: ({ src, alt }) => <div className="relative w-full h-80 mb-4 rounded-sm overflow-hidden">
-                              <Image src={src} fill className="object-cover" />
+                              <Image alt={alt as string} src={src as string} fill className="object-cover" />
                             </div>,
     p: ({ children }) => <p className="mb-2">{children}</p>,
     ul: ({ children }) => <ul className="list-inside my-4 ml-4">{children}</ul>,
