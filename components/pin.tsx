@@ -10,11 +10,14 @@ const pinStyle = {
   stroke: 'none'
 };
 
-function Pin({size = 20}) {
+/* Pin component for displaying a pin on the map */
+function Pin() {
   return (
-    <svg height={size} viewBox="0 0 24 24" style={pinStyle}>
-      <path d={ICON} />
-    </svg>
+      <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center cursor-pointer">
+        <div className="w-8 h-8 bg-red-500 rounded-full absolute animate-ping delay-1000"></div>
+        <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+      </div>
+
   );
 }
 
