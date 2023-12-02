@@ -16,9 +16,9 @@ const Header = () => {
       {/* Logo */}
       <div className="flex items-center">
         <div className="w-12 h-12 bg-black rounded-full flex justify-center items-center cursor-pointer border-white border-2" onClick={() => {
-            // If not already on the /cards page, redirect to the /cards page
-            if (pathname !== "/cards") {
-              router.push("/cards")
+            // If not already on the /wonders page, redirect to the /wonders page
+            if (pathname !== "/wonders") {
+              router.push("/wonders")
             }
           }
         }>
