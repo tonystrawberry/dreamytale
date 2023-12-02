@@ -10,6 +10,7 @@ const pinStyle = {
   stroke: 'none'
 };
 
+/* Pin component for displaying a pin on the map */
 function Pin() {
   return (
       <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center cursor-pointer">
