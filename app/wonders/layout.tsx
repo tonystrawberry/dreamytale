@@ -15,9 +15,9 @@ import Map, {
 import { useState, useRef, useEffect, MutableRefObject } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence, motion } from "framer-motion";
 
-import "mapbox-gl/dist/mapbox-gl.css";
+// import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -120,7 +120,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </Map> */}
       </div>
-      <AnimatePresence mode="wait" >
+      {/* <AnimatePresence mode="wait" >
         <motion.div
           className={`basis-1/2 overflow-y-scroll bg-white`}
           key={pathname}
@@ -144,10 +144,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               },
             },
           }}
-        >
+        > */}
           {children}
-        </motion.div>
-      </AnimatePresence>
+        {/* </motion.div>
+      </AnimatePresence> */}
     </main>
   );
 }
