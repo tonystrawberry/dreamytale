@@ -120,7 +120,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </Map>
       </div>
-      <AnimatePresence mode="wait" >
+      <AnimatePresence>
         <motion.div
           className={`basis-1/2 overflow-y-scroll bg-white`}
           key={pathname}
