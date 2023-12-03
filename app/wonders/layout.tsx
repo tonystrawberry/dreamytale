@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   // Global state of the application
   const popupInfo = useAppStore((state) => state.popupInfo);
-  // const wonders = useAppStore((state) => state.wonders);
+  const wonders = useAppStore((state) => state.wonders);
 
   const setPopupInfo = useAppStore((state) => state.setPopupInfo);
   const setMapRef = useAppStore((state) => state.setMapRef);
