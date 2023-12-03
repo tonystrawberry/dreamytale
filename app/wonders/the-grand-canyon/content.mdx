@@ -1,0 +1,84 @@
+import { BackButton } from '@/components/mdx/back-button';
+import { Tags } from "@/components/mdx/tags"
+import { Description } from "@/components/mdx/description"
+import { CoverImage } from "@/components/mdx/cover-image"
+
+export const metadata = {
+  id: 'victoria-falls',
+  name: 'Victoria Falls',
+  description: `Victoria Falls is one of the world's most spectacular waterfalls, known locally as "Mosi-oa-Tunya" (the smoke that thunders). It's famous for its vast curtain of water plunging into a deep gorge, creating a breathtaking display of mist and rainbows.`,
+  latitude: -17.9316,
+  longitude: 25.8302,
+  tags: [{
+    name: 'ocean',
+    color: 'blue'
+  }, {
+    name: 'coral',
+    color: 'blue'
+  }, {
+    name: 'reef',
+    color: 'blue'
+  }, {
+    name: 'australia',
+    color: 'blue'
+  }, {
+    name: 'world',
+    color: 'blue'
+  }],
+
+}
+
+<CoverImage alt="The Great Barrier Reef | Cover" src="/wonders/victoria-falls/cover.jpg" />
+
+<div className="p-8">
+  # Exploring Victoria Falls: Nature's Majesty
+
+  <Tags tags={metadata.tags} />
+  <Description description={metadata.description} />
+
+  ## Introduction
+
+  Welcome to Victoria Falls, a breathtaking natural wonder nestled on the Zambezi River, bordering Zambia and Zimbabwe. Known locally as "Mosi-oa-Tunya" (the smoke that thunders), Victoria Falls is a mesmerizing spectacle that captivates visitors from around the globe.
+
+  ## Experiencing the Falls
+
+  ### Witnessing the Marvel
+
+  ![Victoria Falls](/wonders/victoria-falls/1.jpg)
+
+  Prepare to be awestruck as you witness the world's largest sheet of falling water. Feel the ground tremble beneath your feet as millions of liters cascade over a width of nearly 1,700 meters and plummet into a gorge that reaches depths of over 100 meters. The resulting mist creates rainbows, providing a magical backdrop to this natural wonder.
+
+  ### Activities and Adventures
+
+  - **Helicopter Rides:** Gain a bird's-eye view of the falls with a thrilling helicopter ride. Marvel at the sheer size and grandeur from above.
+  - **Devil's Pool:** For the adventurous, experience the heart-racing thrill of swimming in the Devil's Pool, perched at the edge of the falls (available during low water season).
+  - **Nature Walks:** Explore the lush surrounding rainforest on guided walks, witnessing diverse flora and fauna.
+
+  ### Best Viewing Points
+
+  - **Knife-Edge Bridge:** Walk across this bridge for stunning panoramic views of the falls.
+  - **Victoria Falls Bridge:** Cross the bridge for breathtaking vistas and the opportunity to witness daredevils bungee jumping or zip-lining across the gorge.
+
+  ## Nearby Attractions
+
+  ### Zambezi River Cruise
+
+  ![Zambezi River](/wonders/victoria-falls/2.jpg)
+
+  Embark on a serene cruise along the Zambezi River. Encounter wildlife like elephants, hippos, and crocodiles while enjoying a sunset backdrop, creating an unforgettable experience.
+
+  ### Adrenaline Adventures
+
+  - **Bungee Jumping:** For the adrenaline junkies, take the plunge off the Victoria Falls Bridge.
+  - **White Water Rafting:** Brace yourself for an exhilarating ride through the Zambezi's rapids, offering an adrenaline-pumping adventure.
+
+  ### Local Culture and Markets
+
+  Immerse yourself in the vibrant local culture by visiting nearby markets. Interact with locals, purchase authentic souvenirs, and savor traditional cuisine for a complete cultural experience.
+
+  ## Conclusion
+
+  Victoria Falls is not just a destination; it's an encounter with the raw power and beauty of nature. Whether you seek adventure, serenity, or cultural immersion, the falls and its surrounding attractions offer an unforgettable journey. Prepare to be mesmerized and leave with memories to last a lifetime.
+
+  <BackButton />
+</div>

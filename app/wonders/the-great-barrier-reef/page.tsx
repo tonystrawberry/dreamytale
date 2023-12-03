@@ -1,7 +1,6 @@
 import React from 'react'
+import Content from './content.mdx'
 
 export default function Page() {
-  return (
-    <div>The Great Barrier Reef</div>
-  )
+  return <Content />
 }
