@@ -15,7 +15,6 @@ import Map, {
 import { useState, useRef, useEffect, MutableRefObject } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
