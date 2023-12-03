@@ -74,7 +74,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="h-[calc(100vh-80px)] flex">
       <div className="basis-1/2">
-        <Map
+        {/* <Map
           ref={mapRef}
           initialViewState={{
             latitude: 40,
@@ -91,7 +91,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <NavigationControl position="top-left" />
           <ScaleControl />
 
-          {/* {pins} */}
+          {pins}
 
           {popupInfo && (
             <Popup
@@ -118,7 +118,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </Popup>
           )}
-        </Map>
+        </Map> */}
       </div>
       <AnimatePresence mode="wait" >
         <motion.div
