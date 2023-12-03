@@ -28,48 +28,48 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   // Global state of the application
   const popupInfo = useAppStore((state) => state.popupInfo);
-  const wonders = useAppStore((state) => state.wonders);
+  // const wonders = useAppStore((state) => state.wonders);
 
   const setPopupInfo = useAppStore((state) => state.setPopupInfo);
   const setMapRef = useAppStore((state) => state.setMapRef);
 
   setMapRef(mapRef as MutableRefObject<MapRef>);
 
-  // Local state of the component to store the pins
-  const [pins, setPins] = useState<JSX.Element[]>([]);
+  // // Local state of the component to store the pins
+  // const [pins, setPins] = useState<JSX.Element[]>([]);
 
-  // Set the Pins on the map
-  // This is a side effect that will run every time the `wonders` change
-  useEffect(() => {
-    const pins = wonders.map((story, index) => (
-      <Marker
-        key={`marker-${index}`}
-        longitude={story.metadata.longitude}
-        latitude={story.metadata.latitude}
-        anchor="center"
-        onClick={(e) => {
-          if (!mapRef || !mapRef.current) return;
+  // // Set the Pins on the map
+  // // This is a side effect that will run every time the `wonders` change
+  // useEffect(() => {
+  //   const pins = wonders.map((story, index) => (
+  //     <Marker
+  //       key={`marker-${index}`}
+  //       longitude={story.metadata.longitude}
+  //       latitude={story.metadata.latitude}
+  //       anchor="center"
+  //       onClick={(e) => {
+  //         if (!mapRef || !mapRef.current) return;
 
-          // If we let the click event propagates to the map, it will immediately close the popup
-          // with `closeOnClick: true`
-          e.originalEvent.stopPropagation();
-          setPopupInfo(story);
+  //         // If we let the click event propagates to the map, it will immediately close the popup
+  //         // with `closeOnClick: true`
+  //         e.originalEvent.stopPropagation();
+  //         setPopupInfo(story);
 
-          mapRef.current.flyTo({
-            center: [story.metadata.longitude, story.metadata.latitude],
-            zoom: 4,
-            pitch: 30,
-            duration: 3000,
-            essential: true,
-          });
-        }}
-      >
-        <Pin />
-      </Marker>
-    ));
+  //         mapRef.current.flyTo({
+  //           center: [story.metadata.longitude, story.metadata.latitude],
+  //           zoom: 4,
+  //           pitch: 30,
+  //           duration: 3000,
+  //           essential: true,
+  //         });
+  //       }}
+  //     >
+  //       <Pin />
+  //     </Marker>
+  //   ));
 
-    setPins(pins);
-  }, [mapRef, wonders, setPopupInfo]);
+  //   setPins(pins);
+  // }, [mapRef, wonders, setPopupInfo]);
 
   return (
     <main className="h-[calc(100vh-80px)] flex">
@@ -91,7 +91,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <NavigationControl position="top-left" />
           <ScaleControl />
 
-          {pins}
+          {/* {pins} */}
 
           {popupInfo && (
             <Popup
