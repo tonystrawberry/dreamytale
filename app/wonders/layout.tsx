@@ -4,7 +4,6 @@ import Pin from "@/components/pin";
 import useAppStore from "@/state/state";
 
 import Map, {
-  FullscreenControl,
   GeolocateControl,
   Marker,
   NavigationControl,
@@ -19,6 +18,8 @@ import Image from "next/image";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { AnimatePresence, motion } from "framer-motion";
+import classNames from "classnames";
+import { getAllWonders } from "@/utils/getWonders";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -41,7 +42,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   // Global state of the application
   const popupInfo = useAppStore((state) => state.popupInfo);
   const wonders = useAppStore((state) => state.wonders);
+  const showMap = useAppStore((state) => state.showMap);
 
+  const setWonders = useAppStore((state) => state.setWonders);
   const setPopupInfo = useAppStore((state) => state.setPopupInfo);
   const setMapRef = useAppStore((state) => state.setMapRef);
 
@@ -69,8 +72,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           mapRef.current.flyTo({
             center: [story.metadata.longitude, story.metadata.latitude],
-            zoom: 4,
-            pitch: 30,
+            zoom: 2.5,
             duration: 3000,
             essential: true,
           });
@@ -83,23 +85,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setPins(pins);
   }, [mapRef, wonders, setPopupInfo]);
 
+  // Get all the wonders from the `wonders` directory
+  // and set them in the state
+  useEffect(() => {
+    getAllWonders().then((wonders: any[]) => {
+      setWonders(wonders);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
   return (
-    <main className="h-[calc(100vh-80px)] flex">
-      <div className="basis-1/2">
+    <main className="h-[calc(100vh-80px)] flex flex-col md:flex-row">
+
+      <div
+        className={classNames({
+          "basis-1/3 flex:basis-1/2": true,
+          "hidden": !showMap,
+        })}
+      >
         <Map
           ref={mapRef}
           initialViewState={{
-            latitude: 40,
-            longitude: -100,
-            zoom: 3.5,
+            latitude: 46.2276,
+            longitude: 2.2137,
+            zoom: 0,
             bearing: 0,
             pitch: 0,
           }}
           mapStyle="mapbox://styles/tonystrawberry/clp5kkwiu00gb01of5iaa9cnv"
           mapboxAccessToken={MAPBOX_TOKEN}
         >
-          <GeolocateControl position="top-left" />
-          <FullscreenControl position="top-left" />
+          <GeolocateControl position="top-left" fitBoundsOptions={{ maxZoom: 5 }}/>
           <NavigationControl position="top-left" />
           <ScaleControl />
 
@@ -132,7 +149,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </Map>
       </div>
-      <div className="basis-1/2 overflow-y-scroll bg-white">
+      <div
+        className={classNames({
+          "overflow-y-scroll bg-white": true,
+          "basis-2/3 flex:basis-1/2": showMap,
+          "basis-3/3 flex:basis-2/2": !showMap,
+        })}
+      >
       {/* TODO: Make AnimatePresence work (https://github.com/vercel/next.js/issues/49279#issuecomment-1541939624) */}
       <AnimatePresence>
         <motion.div
