@@ -12,13 +12,26 @@ import Map, {
   ScaleControl,
   MapRef
 } from "react-map-gl";
-import { useState, useRef, useEffect, MutableRefObject } from "react";
+import { useState, useRef, useEffect, MutableRefObject, useContext } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
 import "mapbox-gl/dist/mapbox-gl.css";
+import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { AnimatePresence, motion } from "framer-motion";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+function FrozenRouter({ children }: { children: React.ReactNode }) {
+  const context = useContext(LayoutRouterContext);
+  const frozen = useRef(context).current;
+
+  return (
+    <LayoutRouterContext.Provider value={frozen}>
+      { children }
+    </LayoutRouterContext.Provider>
+  );
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const mapRef = useRef<MapRef | null>(null);
@@ -120,7 +133,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Map>
       </div>
       <div className="basis-1/2 overflow-y-scroll bg-white">
-      {/* <AnimatePresence>
+      {/* TODO: Make AnimatePresence work (https://github.com/vercel/next.js/issues/49279#issuecomment-1541939624) */}
+      <AnimatePresence>
         <motion.div
           className={`basis-1/2 overflow-y-scroll bg-white`}
           key={pathname}
@@ -144,10 +158,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               },
             },
           }}
-        > */}
-          {children}
-        {/* </motion.div>
-      </AnimatePresence> */}
+        >
+          <FrozenRouter>{children}</FrozenRouter>
+        </motion.div>
+      </AnimatePresence>
       </div>
     </main>
   );
