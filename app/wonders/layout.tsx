@@ -17,7 +17,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 // import { AnimatePresence, motion } from "framer-motion";
 
-// import "mapbox-gl/dist/mapbox-gl.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -35,46 +35,46 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   setMapRef(mapRef as MutableRefObject<MapRef>);
 
-  // // Local state of the component to store the pins
-  // const [pins, setPins] = useState<JSX.Element[]>([]);
+  // Local state of the component to store the pins
+  const [pins, setPins] = useState<JSX.Element[]>([]);
 
-  // // Set the Pins on the map
-  // // This is a side effect that will run every time the `wonders` change
-  // useEffect(() => {
-  //   const pins = wonders.map((story, index) => (
-  //     <Marker
-  //       key={`marker-${index}`}
-  //       longitude={story.metadata.longitude}
-  //       latitude={story.metadata.latitude}
-  //       anchor="center"
-  //       onClick={(e) => {
-  //         if (!mapRef || !mapRef.current) return;
+  // Set the Pins on the map
+  // This is a side effect that will run every time the `wonders` change
+  useEffect(() => {
+    const pins = wonders.map((story, index) => (
+      <Marker
+        key={`marker-${index}`}
+        longitude={story.metadata.longitude}
+        latitude={story.metadata.latitude}
+        anchor="center"
+        onClick={(e) => {
+          if (!mapRef || !mapRef.current) return;
 
-  //         // If we let the click event propagates to the map, it will immediately close the popup
-  //         // with `closeOnClick: true`
-  //         e.originalEvent.stopPropagation();
-  //         setPopupInfo(story);
+          // If we let the click event propagates to the map, it will immediately close the popup
+          // with `closeOnClick: true`
+          e.originalEvent.stopPropagation();
+          setPopupInfo(story);
 
-  //         mapRef.current.flyTo({
-  //           center: [story.metadata.longitude, story.metadata.latitude],
-  //           zoom: 4,
-  //           pitch: 30,
-  //           duration: 3000,
-  //           essential: true,
-  //         });
-  //       }}
-  //     >
-  //       <Pin />
-  //     </Marker>
-  //   ));
+          mapRef.current.flyTo({
+            center: [story.metadata.longitude, story.metadata.latitude],
+            zoom: 4,
+            pitch: 30,
+            duration: 3000,
+            essential: true,
+          });
+        }}
+      >
+        <Pin />
+      </Marker>
+    ));
 
-  //   setPins(pins);
-  // }, [mapRef, wonders, setPopupInfo]);
+    setPins(pins);
+  }, [mapRef, wonders, setPopupInfo]);
 
   return (
     <main className="h-[calc(100vh-80px)] flex">
       <div className="basis-1/2">
-        {/* <Map
+        <Map
           ref={mapRef}
           initialViewState={{
             latitude: 40,
@@ -118,7 +118,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </Popup>
           )}
-        </Map> */}
+        </Map>
       </div>
       {/* <AnimatePresence mode="wait" >
         <motion.div
