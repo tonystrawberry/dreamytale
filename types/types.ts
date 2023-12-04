@@ -3,7 +3,7 @@ export interface Tag {
   color: string;
 }
 
-export interface Story {
+export interface Wonder {
   slug: string;
   metadata: {
     name: string;
