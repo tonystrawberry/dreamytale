@@ -100,7 +100,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <div
         className={classNames({
-          "basis-1/3 flex:basis-1/2": true,
+          "basis-1/3 md:basis-1/2": true,
           "hidden": !showMap,
         })}
       >
@@ -152,14 +152,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div
         className={classNames({
           "overflow-y-scroll bg-white": true,
-          "basis-2/3 flex:basis-1/2": showMap,
-          "basis-3/3 flex:basis-2/2": !showMap,
+          "basis-2/3 md:basis-1/2": showMap,
+          "basis-3/3 md:basis-2/2": !showMap,
         })}
       >
       {/* TODO: Make AnimatePresence work (https://github.com/vercel/next.js/issues/49279#issuecomment-1541939624) */}
       <AnimatePresence>
         <motion.div
-          className={`basis-1/2 overflow-y-scroll bg-white`}
+          className={`basis-1/2 bg-white`}
           key={pathname}
           initial="initialState"
           animate="animateState"

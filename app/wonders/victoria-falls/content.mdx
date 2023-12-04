@@ -2,11 +2,15 @@ import { BackButton } from '@/components/mdx/back-button';
 import { Tags } from "@/components/mdx/tags"
 import { Description } from "@/components/mdx/description"
 import { CoverImage } from "@/components/mdx/cover-image"
+import { Socials } from "@/components/mdx/socials"
+import { RelatedWonders } from "@/components/mdx/related-wonders"
+import { Location } from "@/components/mdx/location"
 
 export const metadata = {
   id: 'victoria-falls',
   name: 'Victoria Falls',
   description: `Victoria Falls is one of the world's most spectacular waterfalls, known locally as "Mosi-oa-Tunya" (the smoke that thunders). It's famous for its vast curtain of water plunging into a deep gorge, creating a breathtaking display of mist and rainbows.`,
+  location: 'Zimbabwe 🇿🇼',
   latitude: -17.9316,
   longitude: 25.8302,
   tags: [{
@@ -32,6 +36,7 @@ export const metadata = {
 
 <div className="p-8">
   # Exploring Victoria Falls: Nature's Majesty
+  <Location location={metadata.location} />
 
   <Tags tags={metadata.tags} />
   <Description description={metadata.description} />
@@ -80,5 +85,8 @@ export const metadata = {
 
   Victoria Falls is not just a destination; it's an encounter with the raw power and beauty of nature. Whether you seek adventure, serenity, or cultural immersion, the falls and its surrounding attractions offer an unforgettable journey. Prepare to be mesmerized and leave with memories to last a lifetime.
 
-  <BackButton />
+  <Socials />
+  <RelatedWonders tags={metadata.tags.map((tag) => (tag.name))} />
 </div>
+
+<BackButton />

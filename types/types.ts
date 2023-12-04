@@ -6,7 +6,7 @@ export interface Tag {
 export interface Story {
   slug: string;
   metadata: {
-    title: string;
+    name: string;
     description: string;
     tags: Tag[];
     longitude: number;

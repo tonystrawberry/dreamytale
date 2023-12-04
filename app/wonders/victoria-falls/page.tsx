@@ -1,7 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import Content from "./content.mdx";
 
 export default function Page() {
-  return <Content />;
+  return (
+    <div className="relative">
+      <Content />
+    </div>
+  )
 }

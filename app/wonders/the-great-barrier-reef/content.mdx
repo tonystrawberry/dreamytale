@@ -2,14 +2,17 @@ import { BackButton } from '@/components/mdx/back-button';
 import { Tags } from "@/components/mdx/tags"
 import { Description } from "@/components/mdx/description"
 import { CoverImage } from "@/components/mdx/cover-image"
+import { Socials } from "@/components/mdx/socials"
+import { RelatedWonders } from "@/components/mdx/related-wonders"
+import { Location } from "@/components/mdx/location"
 
 export const metadata = {
   id: 'the-great-barrier-reef',
   name: "The Great Barrier Reef",
   description: "The world's largest coral reef system, the Great Barrier Reef spans over 2,300 kilometers and is composed of thousands of individual reefs and islands. It's renowned for its stunning biodiversity, with countless species of colorful fish, corals, and other marine life.",
+  location: 'Queensland | Australia 🇦🇺',
   latitude: -18.2871,
   longitude: 147.6992,
-  location: 'Queensland, Australia',
   tags: [{
     name: 'ocean',
     color: 'blue'
@@ -32,6 +35,7 @@ export const metadata = {
 
 <div className="p-8">
   # Discovering Nature's Underwater Wonderland
+  <Location location={metadata.location} />
 
   <Tags tags={metadata.tags} />
   <Description description={metadata.description} />
@@ -121,5 +125,8 @@ export const metadata = {
 
   The Belize Reef off the Caribbean coast of Belize is the second longest barrier reef in the world at 290 kilometres, while Ningaloo Reef off the West Australian coast is 280 kilometres long.
 
-  <BackButton />
+  <Socials />
+  <RelatedWonders tags={metadata.tags.map((tag) => (tag.name))} />
 </div>
+
+<BackButton />
