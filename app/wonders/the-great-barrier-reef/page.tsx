@@ -6,7 +6,7 @@ import { useIncrementViewsCount } from "@/hooks/useIncrementViewsCount";
 import { useScrollToLocation } from "@/hooks/useScrollToLocation";
 
 export default function Page() {
-  // useScrollToLocation();
+  useScrollToLocation();
   useIncrementViewsCount();
 
   return (
