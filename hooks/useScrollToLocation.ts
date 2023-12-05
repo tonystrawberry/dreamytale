@@ -5,7 +5,7 @@ import { useRef, useEffect } from "react";
 /* Hook for scrolling to a location on the page based on the hash in the URL. */
 export const useScrollToLocation = () => {
   const scrolledRef = useRef(false);
-  const hash = window.location.hash;
+  const hash = (typeof window !== 'undefined' ? window.location.hash : null);
   const hashRef = useRef(hash);
 
   useEffect(() => {
