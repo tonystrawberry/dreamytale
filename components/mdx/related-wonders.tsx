@@ -74,6 +74,7 @@ export function RelatedWonders({ tags }: { tags: string[] }) {
                 essential: true,
               });
             }}
+            viewsCount={0} // TODO: get views count from firestore
           />
         ))}
       </div>

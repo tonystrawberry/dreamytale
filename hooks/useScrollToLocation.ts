@@ -1,14 +1,14 @@
 'use client';
 
-import React from "react";
+import { useRef, useEffect } from "react";
 
 /* Hook for scrolling to a location on the page based on the hash in the URL. */
 export const useScrollToLocation = () => {
-  const scrolledRef = React.useRef(false);
+  const scrolledRef = useRef(false);
   const hash = window.location.hash;
-  const hashRef = React.useRef(hash);
+  const hashRef = useRef(hash);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (hash) {
       // We want to reset if the hash has changed
       if (hashRef.current !== hash) {
