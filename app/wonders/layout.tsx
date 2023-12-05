@@ -19,7 +19,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
-import { getAllWonders } from "@/utils/getWonders";
+import { getAllWonders } from "@/lib/getWonders";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 

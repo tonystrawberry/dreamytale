@@ -17,7 +17,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ children }) => {
       const anchor = getAnchor(children as string);
       const link = `#${anchor}`;
-      return  <h2 className="flex items-center gap-2 text-3xl md:text-4xl font-bold my-4 tracking-tighter">
+      return  <h2 id={anchor} className="flex items-center gap-2 text-3xl md:text-4xl font-bold my-4 tracking-tighter">
                 {children}
                 <a href={link}><Link className="w-6 h-6 text-black" /></a>
               </h2>
